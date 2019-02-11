@@ -34,3 +34,32 @@ const compressRepeatingChars = (input) => {
 /* Examples */
 compressRepeatingChars("aaabbdcccccf") === "a3b2d1c5f1"
 compressRepeatingChars("hhhhhqqlllllllhhhppp") === "h5q2l7h3p3"
+
+
+/* I found another version of the same exercise which I did back in October 2018 */
+const toLeet = (input) => input.replace(/[aA]/g, '4')
+                               .replace(/[eE]/g, '3')
+                               .replace(/[iI]/g, '1')
+                               .replace(/[oO]/g, '0')
+                               .replace(/[sS]/g, '5')
+                               .replace(/[tT]/g, '7');
+
+// Given a string like aaabbdcccccf, write a function that transform it to: a3b2d1c5f1
+// Please note: aabbaa → a2b2a2 not a4b2
+const countRep5 = (input) => {
+    let output = '', lastInput = null, counter = '';
+    for(let i = 0; i < input.length; i++) {
+        if(input[i] !== lastInput) {
+            lastInput = input[i];
+            output += counter + lastInput;
+            counter = 1;
+        } else {
+            counter++;
+        }
+    }
+    return output+counter;
+}
+
+// an alternate version of the above code:
+input.split(/[.]+/g).map((x)=>x[0]+x.length).join('')
+
